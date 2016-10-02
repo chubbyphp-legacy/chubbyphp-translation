@@ -49,6 +49,34 @@ echo $translator->translate('fr', 'another.existing.key'); // some.existing.key
 echo $translator->generateKey('This is a random text') // thisisarandomtext
 ```
 
+### TranslationProvider (Pimple)
+
+```{.php}
+<?php
+
+use Chubbyphp\Translation\Translator;
+use Chubbyphp\Translation\TranslationProvider;
+use Pimple\Container;
+
+$container->register(new TranslationProvider);
+
+$container->extend('translator.providers', function (array $providers) use ($container) {
+    $providers[] = new LocaleTranslationProvider('de', [
+        'some.existing.key' => 'erfolgreiche Uebersetzung',
+        'another.existing.key' => '%d erfolgreiche Uebersetzungen'
+    ]);
+    $providers[] = new LocaleTranslationProvider('en', [
+        'some.existing.key' => 'successful translation',
+        'another.existing.key' => '%d successful translations'
+    ]);
+
+    return $providers;
+});
+
+/** @var Translation $translator */
+$translator = $container['translator'];
+```
+
 ### TranslationTwigExtension
 
 ```{.php}
