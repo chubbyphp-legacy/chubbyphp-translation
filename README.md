@@ -1,0 +1,73 @@
+# chubbyphp-translation
+
+[![Build Status](https://api.travis-ci.org/chubbyphp/chubbyphp-translation.png?branch=master)](https://travis-ci.org/chubbyphp/chubbyphp-translation)
+[![Total Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-translation/downloads.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
+[![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-translation/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/?branch=master)
+
+## Description
+
+A simple translation solution.
+
+## Requirements
+
+ * php: ~7.0
+
+## Installation
+
+Through [Composer](http://getcomposer.org) as [chubbyphp/chubbyphp-translation][1].
+
+## Usage
+
+### Translator
+
+```{.php}
+<?php
+
+use Chubbyphp\Translation\LocaleTranslationProvider;
+use Chubbyphp\Translation\Translator;
+
+$translator = new Translator([
+    new LocaleTranslationProvider('de', [
+        'some.existing.key' => 'erfolgreiche Uebersetzung',
+        'another.existing.key' => '%d erfolgreiche Uebersetzungen'
+    ]),
+    new LocaleTranslationProvider('en', [
+        'some.existing.key' => 'successful translation',
+        'another.existing.key' => '%d successful translations'
+    ])
+]);
+
+echo $translator->translate('de', 'some.existing.key'); // erfolgreiche Uebersetzung
+echo $translator->translate('en', 'some.existing.key'); // successful translation
+echo $translator->translate('fr', 'some.existing.key'); // some.existing.key
+
+echo $translator->translate('de', 'another.existing.key'); // 5 erfolgreiche Uebersetzungen
+echo $translator->translate('en', 'another.existing.key'); // 5 successful translations
+echo $translator->translate('fr', 'another.existing.key'); // some.existing.key
+
+echo $translator->generateKey('This is a random text') // thisisarandomtext
+```
+
+### TranslationTwigExtension
+
+```{.php}
+<?php
+
+use Chubbyphp\Translation\LocaleTranslationProvider;
+use Chubbyphp\Translation\TranslationTwigExtension;
+use Chubbyphp\Translation\Translator;
+
+$twig->addExtension(new TranslationTwigExtension(new Translator([])));
+```
+
+```{.twig}
+{{ 'some.existing.key'|translate('de') }}
+{{ 'another.existing.key'|translate('de', [5]) }}
+```
+
+[1]: https://packagist.org/packages/chubbyphp/chubbyphp-translation
+
+## Copyright
+
+Dominik Zogg 2016
