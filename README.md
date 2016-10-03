@@ -13,6 +13,11 @@ A simple translation solution.
 
  * php: ~7.0
 
+## Suggest
+
+ * pimple/pimple: ~3.0
+ * twig/twig: ^1.25.0
+
 ## Installation
 
 Through [Composer](http://getcomposer.org) as [chubbyphp/chubbyphp-translation][1].
