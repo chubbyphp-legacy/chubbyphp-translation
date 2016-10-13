@@ -19,7 +19,7 @@ final class TranslationProvider implements ServiceProviderInterface
         };
 
         $container['translator'] = function () use ($container) {
-            return new Translator($container['translator.providers']);
+            return new Translator($container['translator.providers'], $container['logger'] ?? null);
         };
     }
 }

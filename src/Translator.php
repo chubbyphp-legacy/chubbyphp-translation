@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Chubbyphp\Translation;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+
 final class Translator implements TranslatorInterface
 {
     /**
@@ -12,15 +15,21 @@ final class Translator implements TranslatorInterface
     private $localeTranslationProviders = [];
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * Translator constructor.
      *
      * @param array $localeTranslationProviders
      */
-    public function __construct(array $localeTranslationProviders)
+    public function __construct(array $localeTranslationProviders, LoggerInterface $logger = null)
     {
         foreach ($localeTranslationProviders as $localeTranslationProvider) {
             $this->addLocaleTranslationProvider($localeTranslationProvider);
         }
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -43,6 +52,8 @@ final class Translator implements TranslatorInterface
         if (isset($this->localeTranslationProviders[$locale])) {
             return $this->localeTranslationProviders[$locale]->translate($key, $args);
         }
+
+        $this->logger->notice('translation: missing {locale}', ['locale' => $locale]);
 
         return $key;
     }

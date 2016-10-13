@@ -10,8 +10,12 @@ use Chubbyphp\Translation\Translator;
  */
 final class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
+    use LoggerTestTrait;
+
     public function testTranslateWithoutArguments()
     {
+        $logger = $this->getLogger();
+
         $translator = new Translator([
             $this->getLocaleTranslationProvider('de', [
                 'some.existing.key' => 'erfolgreiche Uebersetzung',
@@ -19,7 +23,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
             $this->getLocaleTranslationProvider('en', [
                 'some.existing.key' => 'successful translation',
             ]),
-        ]);
+        ], $logger);
 
         self::assertSame('erfolgreiche Uebersetzung', $translator->translate('de', 'some.existing.key'));
         self::assertSame('successful translation', $translator->translate('en', 'some.existing.key'));
@@ -27,10 +31,17 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('some.not.existing.key', $translator->translate('de', 'some.not.existing.key'));
         self::assertSame('some.not.existing.key', $translator->translate('en', 'some.not.existing.key'));
         self::assertSame('some.not.existing.key', $translator->translate('fr', 'some.not.existing.key'));
+
+        self::assertCount(1, $logger->__logs);
+        self::assertSame('notice', $logger->__logs[0]['level']);
+        self::assertSame('translation: missing {locale}', $logger->__logs[0]['message']);
+        self::assertSame(['locale' => 'fr'], $logger->__logs[0]['context']);
     }
 
     public function testTranslateWithArguments()
     {
+        $logger = $this->getLogger();
+
         $translator = new Translator([
             $this->getLocaleTranslationProvider('de', [
                 'some.existing.key' => '%d erfolgreiche Uebersetzungen',
@@ -38,7 +49,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
             $this->getLocaleTranslationProvider('en', [
                 'some.existing.key' => '%d successful translations',
             ]),
-        ]);
+        ], $logger);
 
         self::assertSame('5 erfolgreiche Uebersetzungen', $translator->translate('de', 'some.existing.key', [5]));
         self::assertSame('5 successful translations', $translator->translate('en', 'some.existing.key', [5]));
@@ -46,6 +57,11 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('some.not.existing.key', $translator->translate('de', 'some.not.existing.key', [5]));
         self::assertSame('some.not.existing.key', $translator->translate('en', 'some.not.existing.key', [5]));
         self::assertSame('some.not.existing.key', $translator->translate('fr', 'some.not.existing.key', [5]));
+
+        self::assertCount(1, $logger->__logs);
+        self::assertSame('notice', $logger->__logs[0]['level']);
+        self::assertSame('translation: missing {locale}', $logger->__logs[0]['message']);
+        self::assertSame(['locale' => 'fr'], $logger->__logs[0]['context']);
     }
 
     public function testGenerateKey()
