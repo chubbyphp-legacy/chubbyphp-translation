@@ -23,7 +23,7 @@ final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
 
         $filters = $extension->getFilters();
 
-        self::assertCount(2, $filters);
+        self::assertCount(1, $filters);
 
         /** @var \Twig_SimpleFilter $translateFilter */
         $translateFilter = $filters[0];
@@ -31,13 +31,6 @@ final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(\Twig_SimpleFilter::class, $translateFilter);
         self::assertSame('translate', $translateFilter->getName());
         self::assertSame([$extension, 'translate'], $translateFilter->getCallable());
-
-        /** @var \Twig_SimpleFilter $generateKeyFilter */
-        $generateKeyFilter = $filters[1];
-
-        self::assertInstanceOf(\Twig_SimpleFilter::class, $generateKeyFilter);
-        self::assertSame('generateKey', $generateKeyFilter->getName());
-        self::assertSame([$extension, 'generateKey'], $generateKeyFilter->getCallable());
     }
 
     public function testTranslateWithoutArguments()
@@ -68,16 +61,6 @@ final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
         self::assertSame('some.existing.key', $extension->translate('some.existing.key', 'fr', [5]));
     }
 
-    public function testGenerateKey()
-    {
-        $extension = new TranslationTwigExtension($this->getTranslator([]));
-
-        self::assertSame(
-            'thisisarandomtextthatneedsatleast1translationkey',
-            $extension->generateKey('This is a random text that needs at least 1 translation key')
-        );
-    }
-
     /**
      * @param array $translations
      *
@@ -87,7 +70,7 @@ final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $provider = $this
             ->getMockBuilder(TranslatorInterface::class)
-            ->setMethods(['translate', 'generateKey'])
+            ->setMethods(['translate'])
             ->getMockForAbstractClass()
         ;
 
@@ -99,19 +82,6 @@ final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
                     if (isset($translations[$locale][$key])) {
                         return sprintf($translations[$locale][$key], ...$arguments);
                     }
-
-                    return $key;
-                }
-            )
-        ;
-
-        $provider
-            ->expects(self::any())
-            ->method('generateKey')
-            ->willReturnCallback(
-                function (string $text) {
-                    $key = strtolower($text);
-                    $key = preg_replace('/[^a-zA-Z0-9]/', '', $key);
 
                     return $key;
                 }

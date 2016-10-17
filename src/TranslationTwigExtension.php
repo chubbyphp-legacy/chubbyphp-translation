@@ -34,7 +34,6 @@ final class TranslationTwigExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('translate', [$this, 'translate']),
-            new \Twig_SimpleFilter('generateKey', [$this, 'generateKey']),
         ];
     }
 
@@ -48,18 +47,5 @@ final class TranslationTwigExtension extends \Twig_Extension
     public function translate(string $key, string $locale, array $args = []): string
     {
         return $this->translator->translate($locale, $key, $args);
-    }
-
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    public function generateKey(string $string): string
-    {
-        $string = strtolower($string);
-        $string = preg_replace('/[^a-zA-Z0-9]/i', '', $string);
-
-        return $string;
     }
 }
