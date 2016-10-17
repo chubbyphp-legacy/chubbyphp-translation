@@ -57,17 +57,4 @@ final class Translator implements TranslatorInterface
 
         return $key;
     }
-
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
-    public function generateKey(string $text): string
-    {
-        $key = strtolower($text);
-        $key = preg_replace('/[^a-zA-Z0-9]/', '', $key);
-
-        return $key;
-    }
 }

@@ -64,16 +64,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame(['locale' => 'fr'], $logger->__logs[0]['context']);
     }
 
-    public function testGenerateKey()
-    {
-        $translator = new Translator([]);
-
-        self::assertSame(
-            'thisisarandomtextthatneedsatleast1translationkey',
-            $translator->generateKey('This is a random text that needs at least 1 translation key')
-        );
-    }
-
     /**
      * @param string $locale
      * @param array  $translations
