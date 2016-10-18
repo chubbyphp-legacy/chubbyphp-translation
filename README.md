@@ -47,9 +47,9 @@ echo $translator->translate('de', 'some.existing.key'); // erfolgreiche Ueberse
 echo $translator->translate('en', 'some.existing.key'); // successful translation
 echo $translator->translate('fr', 'some.existing.key'); // some.existing.key
 
-echo $translator->translate('de', 'another.existing.key'); // 5 erfolgreiche Uebersetzungen
-echo $translator->translate('en', 'another.existing.key'); // 5 successful translations
-echo $translator->translate('fr', 'another.existing.key'); // some.existing.key
+echo $translator->translate('de', 'another.existing.key', [5]); // 5 erfolgreiche Uebersetzungen
+echo $translator->translate('en', 'another.existing.key', [5]); // 5 successful translations
+echo $translator->translate('fr', 'another.existing.key', [5]); // some.existing.key
 ```
 
 ### TranslationProvider (Pimple)
