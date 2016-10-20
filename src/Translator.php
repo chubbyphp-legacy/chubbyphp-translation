@@ -50,10 +50,16 @@ final class Translator implements TranslatorInterface
     public function translate(string $locale, string $key, array $args = []): string
     {
         if (isset($this->localeTranslationProviders[$locale])) {
-            return $this->localeTranslationProviders[$locale]->translate($key, $args);
+            if (null !== $translation = $this->localeTranslationProviders[$locale]->translate($key, $args)) {
+                $this->logger->info('translation: translate {locale} {key}', ['locale' => $locale, 'key' => $key]);
+
+                return $translation;
+            }
+
+            $this->logger->warning('translation: missing {locale} {key}', ['locale' => $locale, 'key' => $key]);
         }
 
-        $this->logger->notice('translation: missing {locale}', ['locale' => $locale]);
+        $this->logger->warning('translation: missing {locale}', ['locale' => $locale]);
 
         return $key;
     }
