@@ -5,7 +5,7 @@ namespace Chubbyphp\Tests\Translation;
 use Chubbyphp\Translation\LocaleTranslationProvider;
 
 /**
- * @covers Chubbyphp\Translation\LocaleTranslationProvider
+ * @covers \Chubbyphp\Translation\LocaleTranslationProvider
  */
 final class LocaleTranslationProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ final class LocaleTranslationProviderTest extends \PHPUnit_Framework_TestCase
         self::assertNull($provider->translate('some.not.existing.key'));
     }
 
-    public function testTranslateWithArguments()
+    public function testTranslateWithoutNamedArguments()
     {
         $expectedLocale = 'en';
         $expectedTranslations = [
@@ -42,5 +42,18 @@ final class LocaleTranslationProviderTest extends \PHPUnit_Framework_TestCase
 
         self::assertSame('5 successful translations', $provider->translate('some.existing.key', [5]));
         self::assertNull($provider->translate('some.not.existing.key', [5]));
+    }
+
+        public function testTranslateWithNamedArguments()
+    {
+        $expectedLocale = 'en';
+        $expectedTranslations = [
+            'some.existing.key' => '{{key}} successful translations',
+        ];
+
+        $provider = new LocaleTranslationProvider($expectedLocale, $expectedTranslations);
+
+        self::assertSame('5 successful translations', $provider->translate('some.existing.key', ['key' => 5]));
+        self::assertNull($provider->translate('some.not.existing.key', ['key' => 5]));
     }
 }

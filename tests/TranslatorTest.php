@@ -7,7 +7,7 @@ use Chubbyphp\Translation\Translator;
 use Psr\Log\LoggerInterface;
 
 /**
- * @covers Chubbyphp\Translation\Translator
+ * @covers \Chubbyphp\Translation\Translator
  */
 final class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +54,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame(['locale' => 'fr'], $logger->__logs[4]['context']);
     }
 
-    public function testTranslateWithArguments()
+    public function testTranslateWithoutNamedArguments()
     {
         $logger = $this->getLogger();
 
@@ -73,6 +73,49 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('some.not.existing.key', $translator->translate('de', 'some.not.existing.key', [5]));
         self::assertSame('some.not.existing.key', $translator->translate('en', 'some.not.existing.key', [5]));
         self::assertSame('some.not.existing.key', $translator->translate('fr', 'some.not.existing.key', [5]));
+
+        self::assertCount(5, $logger->__logs);
+
+        self::assertSame('info', $logger->__logs[0]['level']);
+        self::assertSame('translation: translate {locale} {key}', $logger->__logs[0]['message']);
+        self::assertSame(['locale' => 'de', 'key' => 'some.existing.key'], $logger->__logs[0]['context']);
+
+        self::assertSame('info', $logger->__logs[1]['level']);
+        self::assertSame('translation: translate {locale} {key}', $logger->__logs[1]['message']);
+        self::assertSame(['locale' => 'en', 'key' => 'some.existing.key'], $logger->__logs[1]['context']);
+
+        self::assertSame('info', $logger->__logs[2]['level']);
+        self::assertSame('translation: translate {locale} {key}', $logger->__logs[2]['message']);
+        self::assertSame(['locale' => 'de', 'key' => 'some.not.existing.key'], $logger->__logs[2]['context']);
+
+        self::assertSame('info', $logger->__logs[3]['level']);
+        self::assertSame('translation: translate {locale} {key}', $logger->__logs[3]['message']);
+        self::assertSame(['locale' => 'en', 'key' => 'some.not.existing.key'], $logger->__logs[3]['context']);
+
+        self::assertSame('warning', $logger->__logs[4]['level']);
+        self::assertSame('translation: missing {locale}', $logger->__logs[4]['message']);
+        self::assertSame(['locale' => 'fr'], $logger->__logs[4]['context']);
+    }
+
+        public function testTranslateWithNamedArguments()
+    {
+        $logger = $this->getLogger();
+
+        $translator = new Translator([
+            $this->getLocaleTranslationProvider('de', [
+                'some.existing.key' => '{{key}} erfolgreiche Uebersetzungen',
+            ]),
+            $this->getLocaleTranslationProvider('en', [
+                'some.existing.key' => '{{key}} successful translations',
+            ]),
+        ], $logger);
+
+        self::assertSame('5 erfolgreiche Uebersetzungen', $translator->translate('de', 'some.existing.key', ['key' => 5]));
+        self::assertSame('5 successful translations', $translator->translate('en', 'some.existing.key', ['key' => 5]));
+
+        self::assertSame('some.not.existing.key', $translator->translate('de', 'some.not.existing.key', ['key' => 5]));
+        self::assertSame('some.not.existing.key', $translator->translate('en', 'some.not.existing.key', ['key' => 5]));
+        self::assertSame('some.not.existing.key', $translator->translate('fr', 'some.not.existing.key', ['key' => 5]));
 
         self::assertCount(5, $logger->__logs);
 
@@ -119,7 +162,24 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
             ->willReturnCallback(
                 function (string $key, array $arguments) use ($translations) {
                     if (isset($translations[$key])) {
-                        return sprintf($translations[$key], ...$arguments);
+
+                        $hasNamedArguments = false;
+                        foreach (array_keys($arguments) as $name) {
+                            if (!is_numeric($name)) {
+                                $hasNamedArguments = true;
+                            }
+                        }
+
+                        if (!$hasNamedArguments) {
+                            return sprintf($translations[$key], ...$arguments);
+                        }
+
+                        $translation = $translations[$key];
+                        foreach ($arguments as $name => $value) {
+                            $translation = str_replace('{{' . $name . '}}', $value, $translation);
+                        }
+
+                        return $translation;
                     }
 
                     return $key;

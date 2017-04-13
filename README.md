@@ -35,11 +35,13 @@ use Chubbyphp\Translation\Translator;
 $translator = new Translator([
     new LocaleTranslationProvider('de', [
         'some.existing.key' => 'erfolgreiche Uebersetzung',
-        'another.existing.key' => '%d erfolgreiche Uebersetzungen'
+        'another.existing.key' => '%d erfolgreiche Uebersetzungen',
+        'yetanother.existing.key' => '{{key}} erfolgreiche Uebersetzungen'
     ]),
     new LocaleTranslationProvider('en', [
         'some.existing.key' => 'successful translation',
         'another.existing.key' => '%d successful translations'
+        'yetanother.existing.key' => '{{key}} successful translations'
     ])
 ]);
 
@@ -50,6 +52,10 @@ echo $translator->translate('fr', 'some.existing.key'); // some.existing.key
 echo $translator->translate('de', 'another.existing.key', [5]); // 5 erfolgreiche Uebersetzungen
 echo $translator->translate('en', 'another.existing.key', [5]); // 5 successful translations
 echo $translator->translate('fr', 'another.existing.key', [5]); // some.existing.key
+
+echo $translator->translate('de', 'yetanother.existing.key', ['key' => 5]); // 5 erfolgreiche Uebersetzungen
+echo $translator->translate('en', 'yetanother.existing.key', ['key' => 5]); // 5 successful translations
+echo $translator->translate('fr', 'yetanother.existing.key', ['key' => 5]); // some.existing.key
 ```
 
 ### TranslationProvider (Pimple)
@@ -95,6 +101,7 @@ $twig->addExtension(new TranslationTwigExtension(new Translator([])));
 ```{.twig}
 {{ 'some.existing.key'|translate('de') }}
 {{ 'another.existing.key'|translate('de', [5]) }}
+{{ 'yetanother.existing.key'|translate('de', ['key' => 5]) }}
 ```
 
 [1]: https://packagist.org/packages/chubbyphp/chubbyphp-translation

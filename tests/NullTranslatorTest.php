@@ -5,7 +5,7 @@ namespace Chubbyphp\Tests\Translation;
 use Chubbyphp\Translation\NullTranslator;
 
 /**
- * @covers Chubbyphp\Translation\NullTranslator
+ * @covers \Chubbyphp\Translation\NullTranslator
  */
 final class NullTranslatorTest extends \PHPUnit_Framework_TestCase
 {

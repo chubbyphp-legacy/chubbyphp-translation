@@ -6,7 +6,7 @@ use Chubbyphp\Translation\TranslationTwigExtension;
 use Chubbyphp\Translation\TranslatorInterface;
 
 /**
- * @covers Chubbyphp\Translation\TranslationTwigExtension
+ * @covers \Chubbyphp\Translation\TranslationTwigExtension
  */
 final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
 {

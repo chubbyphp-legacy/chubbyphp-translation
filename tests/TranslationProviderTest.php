@@ -7,7 +7,7 @@ use Chubbyphp\Translation\Translator;
 use Pimple\Container;
 
 /**
- * @covers Chubbyphp\Translation\TranslationProvider
+ * @covers \Chubbyphp\Translation\TranslationProvider
  */
 final class TranslationProviderTest extends \PHPUnit_Framework_TestCase
 {
