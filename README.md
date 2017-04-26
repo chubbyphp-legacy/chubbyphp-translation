@@ -23,6 +23,10 @@ A simple translation solution.
 
 Through [Composer](http://getcomposer.org) as [chubbyphp/chubbyphp-translation][1].
 
+```sh
+composer require chubbyphp/chubbyphp-translation "~1.1"
+```
+
 ## Usage
 
 ### Translator
