@@ -27,7 +27,7 @@ Through [Composer](http://getcomposer.org) as [chubbyphp/chubbyphp-translation][
 
 ### Translator
 
-```{.php}
+```php
 <?php
 
 use Chubbyphp\Translation\LocaleTranslationProvider;
@@ -61,7 +61,7 @@ echo $translator->translate('fr', 'yetanother.existing.key', ['key' => 5]); // 
 
 ### TranslationProvider (Pimple)
 
-```{.php}
+```php
 <?php
 
 use Chubbyphp\Translation\Translator;
@@ -89,7 +89,7 @@ $translator = $container['translator'];
 
 ### TranslationTwigExtension
 
-```{.php}
+```php
 <?php
 
 use Chubbyphp\Translation\LocaleTranslationProvider;
@@ -99,7 +99,7 @@ use Chubbyphp\Translation\Translator;
 $twig->addExtension(new TranslationTwigExtension(new Translator([])));
 ```
 
-```{.twig}
+```twig
 {{ 'some.existing.key'|translate('de') }}
 {{ 'another.existing.key'|translate('de', [5]) }}
 {{ 'yetanother.existing.key'|translate('de', ['key' => 5]) }}
