@@ -4,6 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-translation/downloads.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
 [![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-translation/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/?branch=master)
 
 ## Description
 
