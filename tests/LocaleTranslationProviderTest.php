@@ -44,7 +44,7 @@ final class LocaleTranslationProviderTest extends \PHPUnit_Framework_TestCase
         self::assertNull($provider->translate('some.not.existing.key', [5]));
     }
 
-        public function testTranslateWithNamedArguments()
+    public function testTranslateWithNamedArguments()
     {
         $expectedLocale = 'en';
         $expectedTranslations = [

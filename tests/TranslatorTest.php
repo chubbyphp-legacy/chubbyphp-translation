@@ -97,7 +97,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame(['locale' => 'fr'], $logger->__logs[4]['context']);
     }
 
-        public function testTranslateWithNamedArguments()
+    public function testTranslateWithNamedArguments()
     {
         $logger = $this->getLogger();
 
@@ -162,7 +162,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
             ->willReturnCallback(
                 function (string $key, array $arguments) use ($translations) {
                     if (isset($translations[$key])) {
-
                         $hasNamedArguments = false;
                         foreach (array_keys($arguments) as $name) {
                             if (!is_numeric($name)) {
@@ -176,7 +175,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
 
                         $translation = $translations[$key];
                         foreach ($arguments as $name => $value) {
-                            $translation = str_replace('{{' . $name . '}}', $value, $translation);
+                            $translation = str_replace('{{'.$name.'}}', $value, $translation);
                         }
 
                         return $translation;

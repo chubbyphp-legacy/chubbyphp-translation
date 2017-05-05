@@ -54,6 +54,7 @@ final class LocaleTranslationProvider implements LocaleTranslationProviderInterf
 
     /**
      * @param array $arguments
+     *
      * @return bool
      */
     private function hasNamedArguments(array $arguments): bool
@@ -69,7 +70,8 @@ final class LocaleTranslationProvider implements LocaleTranslationProviderInterf
 
     /**
      * @param string $key
-     * @param array $arguments
+     * @param array  $arguments
+     *
      * @return string
      */
     private function translateWithoutNamedArguments(string $key, array $arguments = []): string
@@ -79,14 +81,15 @@ final class LocaleTranslationProvider implements LocaleTranslationProviderInterf
 
     /**
      * @param string $key
-     * @param array $arguments
+     * @param array  $arguments
+     *
      * @return string
      */
     private function translateWithNamedArguments(string $key, array $arguments = []): string
     {
         $translation = $this->translations[$key];
         foreach ($arguments as $name => $value) {
-            $translation = str_replace('{{' . $name . '}}', $value, $translation);
+            $translation = str_replace('{{'.$name.'}}', $value, $translation);
         }
 
         return $translation;
