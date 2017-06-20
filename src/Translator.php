@@ -56,7 +56,9 @@ final class Translator implements TranslatorInterface
                 return $translation;
             }
 
-            $this->logger->warning('translation: missing {locale} {key}', ['locale' => $locale, 'key' => $key]);
+            $this->logger->notice('translation: missing {locale} {key}', ['locale' => $locale, 'key' => $key]);
+
+            return $key;
         }
 
         $this->logger->warning('translation: missing {locale}', ['locale' => $locale]);

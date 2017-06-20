@@ -41,12 +41,12 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('translation: translate {locale} {key}', $logger->__logs[1]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.existing.key'], $logger->__logs[1]['context']);
 
-        self::assertSame('info', $logger->__logs[2]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[2]['message']);
+        self::assertSame('notice', $logger->__logs[2]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[2]['message']);
         self::assertSame(['locale' => 'de', 'key' => 'some.not.existing.key'], $logger->__logs[2]['context']);
 
-        self::assertSame('info', $logger->__logs[3]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[3]['message']);
+        self::assertSame('notice', $logger->__logs[3]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[3]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.not.existing.key'], $logger->__logs[3]['context']);
 
         self::assertSame('warning', $logger->__logs[4]['level']);
@@ -84,12 +84,12 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('translation: translate {locale} {key}', $logger->__logs[1]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.existing.key'], $logger->__logs[1]['context']);
 
-        self::assertSame('info', $logger->__logs[2]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[2]['message']);
+        self::assertSame('notice', $logger->__logs[2]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[2]['message']);
         self::assertSame(['locale' => 'de', 'key' => 'some.not.existing.key'], $logger->__logs[2]['context']);
 
-        self::assertSame('info', $logger->__logs[3]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[3]['message']);
+        self::assertSame('notice', $logger->__logs[3]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[3]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.not.existing.key'], $logger->__logs[3]['context']);
 
         self::assertSame('warning', $logger->__logs[4]['level']);
@@ -127,12 +127,12 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         self::assertSame('translation: translate {locale} {key}', $logger->__logs[1]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.existing.key'], $logger->__logs[1]['context']);
 
-        self::assertSame('info', $logger->__logs[2]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[2]['message']);
+        self::assertSame('notice', $logger->__logs[2]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[2]['message']);
         self::assertSame(['locale' => 'de', 'key' => 'some.not.existing.key'], $logger->__logs[2]['context']);
 
-        self::assertSame('info', $logger->__logs[3]['level']);
-        self::assertSame('translation: translate {locale} {key}', $logger->__logs[3]['message']);
+        self::assertSame('notice', $logger->__logs[3]['level']);
+        self::assertSame('translation: missing {locale} {key}', $logger->__logs[3]['message']);
         self::assertSame(['locale' => 'en', 'key' => 'some.not.existing.key'], $logger->__logs[3]['context']);
 
         self::assertSame('warning', $logger->__logs[4]['level']);
@@ -181,7 +181,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
                         return $translation;
                     }
 
-                    return $key;
+                    return null;
                 }
             )
         ;
