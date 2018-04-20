@@ -4,11 +4,12 @@ namespace Chubbyphp\Tests\Translation;
 
 use Chubbyphp\Translation\TranslationTwigExtension;
 use Chubbyphp\Translation\TranslatorInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Chubbyphp\Translation\TranslationTwigExtension
  */
-final class TranslationTwigExtensionTest extends \PHPUnit_Framework_TestCase
+final class TranslationTwigExtensionTest extends TestCase
 {
     public function testGetName()
     {

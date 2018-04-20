@@ -3,11 +3,12 @@
 namespace Chubbyphp\Tests\Translation;
 
 use Chubbyphp\Translation\LocaleTranslationProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Chubbyphp\Translation\LocaleTranslationProvider
  */
-final class LocaleTranslationProviderTest extends \PHPUnit_Framework_TestCase
+final class LocaleTranslationProviderTest extends TestCase
 {
     public function testGetLocale()
     {

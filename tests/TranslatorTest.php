@@ -4,12 +4,13 @@ namespace Chubbyphp\Tests\Translation;
 
 use Chubbyphp\Translation\LocaleTranslationProviderInterface;
 use Chubbyphp\Translation\Translator;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 /**
  * @covers \Chubbyphp\Translation\Translator
  */
-final class TranslatorTest extends \PHPUnit_Framework_TestCase
+final class TranslatorTest extends TestCase
 {
     public function testTranslateWithoutArguments()
     {

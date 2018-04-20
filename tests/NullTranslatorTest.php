@@ -3,11 +3,12 @@
 namespace Chubbyphp\Tests\Translation;
 
 use Chubbyphp\Translation\NullTranslator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Chubbyphp\Translation\NullTranslator
  */
-final class NullTranslatorTest extends \PHPUnit_Framework_TestCase
+final class NullTranslatorTest extends TestCase
 {
     public function testTranslateWithoutArguments()
     {

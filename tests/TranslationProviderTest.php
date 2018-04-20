@@ -4,12 +4,13 @@ namespace Chubbyphp\Tests\Translation;
 
 use Chubbyphp\Translation\TranslationProvider;
 use Chubbyphp\Translation\Translator;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 
 /**
  * @covers \Chubbyphp\Translation\TranslationProvider
  */
-final class TranslationProviderTest extends \PHPUnit_Framework_TestCase
+final class TranslationProviderTest extends TestCase
 {
     public function testRegister()
     {
