@@ -1,10 +1,12 @@
 # chubbyphp-translation
 
 [![Build Status](https://api.travis-ci.org/chubbyphp/chubbyphp-translation.png?branch=master)](https://travis-ci.org/chubbyphp/chubbyphp-translation)
-[![Total Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-translation/downloads.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
-[![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-translation/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/chubbyphp/chubbyphp-translation/?branch=master)
+[![Total Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-translation/downloads.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
+[![Monthly Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-translation/d/monthly)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
+[![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-translation/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
+[![Latest Unstable Version](https://poser.pugx.org/chubbyphp/chubbyphp-translation/v/unstable)](https://packagist.org/packages/chubbyphp/chubbyphp-translation)
 
 ## Description
 
