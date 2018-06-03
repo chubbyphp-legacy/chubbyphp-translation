@@ -17,7 +17,7 @@ final class LocaleTranslationProvider implements LocaleTranslationProviderInterf
     private $translations;
 
     /**
-     * @param array|\string[] $translations
+     * @param array|string[] $translations
      */
     public function __construct(string $locale, array $translations)
     {
