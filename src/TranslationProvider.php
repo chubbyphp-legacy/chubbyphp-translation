@@ -14,7 +14,7 @@ final class TranslationProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['translator.providers'] = function () use ($container) {
+        $container['translator.providers'] = function () {
             return [];
         };
 
